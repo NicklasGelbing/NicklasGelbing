@@ -130,4 +130,17 @@
 
             standardHourHand.style.transform = `rotate(${(standardHours % 12) * 30 + standardMinutes / 2}deg)`;
             standardMinuteHand.style.transform = `rotate(${standardMinutes * 6}deg)`;
-            standardSecondHand.style.transform = `rotate(${standardSeconds * 6}deg)
+            standardSecondHand.style.transform = `rotate(${standardSeconds * 6}deg)`;
+
+            // Digitale Anzeige
+            document.getElementById("standardDigital").innerText = `Datum: ${now.toLocaleDateString()} - Zeit: ${standardHours.toString().padStart(2, '0')}:${standardMinutes.toString().padStart(2, '0')}:${standardSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Aktualisierung alle 500 ms
+        setInterval(() => {
+            updateFictionalClock();
+            updateStandardClock();
+        }, 500);
+    </script>
+</body>
+</html>
