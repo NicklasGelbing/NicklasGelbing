@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doppeluhr: Reale und Alternative Zeit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .clock-container {
+      display: flex;
+      gap: 50px;
+      margin-top: 20px;
+    }
+    .clock {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border: 5px solid black;
+      border-radius: 50%;
+    }
+    .hand {
+      position: absolute;
+      width: 50%;
+      height: 2px;
+      background-color: black;
+      top: 50%;
+      transform-origin: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+    }
+    .second-hand {
+      height: 1px;
+      background-color: red;
+    }
+    .clock-label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Reale Zeit und Alternative Zeitrechnung</h1>
+
+  <div class="clock-container">
+    <!-- Reale Uhr -->
+    <div class="clock" id="realClock">
+      <div class="hand hour-hand" id="realHourHand"></div>
+      <div class="hand minute-hand" id="realMinuteHand"></div>
+      <div class="hand second-hand" id="realSecondHand"></div>
+    </div>
+    <div class="clock" id="altClock">
+      <div class="hand hour-hand" id="altHourHand"></div>
+      <div class="hand minute-hand" id="altMinuteHand"></div>
+      <div class="hand second-hand" id="altSecondHand"></div>
+    </div>
+  </div>
+
+  <div class="clock-label">Reale Zeit: <span id="realTime"></span></div>
+  <div class="clock-label">Alternative Zeit: <span id="altTime"></span></div>
+
+  <script>
+    function updateClocks() {
+      // Reale Zeit
+      const now = new Date();
+      const realSeconds = now.getSeconds();
+      const realMinutes = now.getMinutes();
+      const realHours = now.getHours();
+      const realTimeString = `${realHours.toString().padStart(2, '0')}:${realMinutes.toString().padStart(2, '0')}:${realSeconds.toString().padStart(2, '0')}`;
+      document.getElementById('realTime').textContent = realTimeString;
+      document.getElementById('realHourHand').style.transform = `rotate(${(realHours % 12) * 30 + realMinutes * 0.5}deg)`;
+      document.getElementById('realMinuteHand').style.transform = `rotate(${realMinutes * 6}deg)`;
+      document.getElementById('realSecondHand').style.transform = `rotate(${realSeconds * 6}deg)`;
+
+      // Alternative Zeitrechnung
+      const altTotalHours = (now.getTime() / (1000 * 60 * 60)) % 20;
+      const altTotalMinutes = (now.getTime() / (1000 * 60)) % 100;
+      const altTotalSeconds = (now.getTime() / 1000) % 100;
+      const altHours = Math.floor(altTotalHours) % 10;
+      const altMinutes = Math.floor(altTotalMinutes);
+      const altSeconds = Math.floor(altTotalSeconds);
+      const altTimeString = `${altHours.toString().padStart(2, '0')}:${altMinutes.toString().padStart(2, '0')}:${altSeconds.toString().padStart(2, '0')}`;
+      document.getElementById('altTime').textContent = altTimeString;
+      document.getElementById('altHourHand').style.transform = `rotate(${(altHours % 10) * 36 + altMinutes * 0.6}deg)`;
+      document.getElementById('altMinuteHand').style.transform = `rotate(${altMinutes * 3.6}deg)`;
+      document.getElementById('altSecondHand').style.transform = `rotate(${altSeconds * 3.6}deg)`;
+    }
+
+    setInterval(updateClocks, 1000);
+    updateClocks();
+  </script>
+
+</body>
+</html>
