@@ -19,6 +19,11 @@
             gap: 50px;
             text-align: center;
         }
+        .clock-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .clock {
             position: relative;
             width: 200px;
@@ -27,29 +32,30 @@
             border-radius: 50%;
             background-color: #fff;
         }
+        .number {
+            position: absolute;
+            font-size: 16px;
+            transform: translate(-50%, -50%);
+        }
         .hand {
             position: absolute;
             background-color: #333;
             transform-origin: bottom center;
-            transform: rotate(90deg);
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .second-hand {
             width: 2px;
             height: 90px;
-            bottom: 50%;
-            left: 50%;
         }
         .minute-hand {
             width: 4px;
             height: 70px;
-            bottom: 50%;
-            left: 50%;
         }
         .hour-hand {
             width: 6px;
             height: 50px;
-            bottom: 50%;
-            left: 50%;
         }
         .digital {
             margin-top: 20px;
@@ -61,8 +67,16 @@
 <body>
     <div class="clock-container">
         <!-- Fiktive Uhr -->
-        <div>
+        <div class="clock-wrapper">
             <div class="clock" id="fictionalClock">
+                <div class="number" style="top: 10%; left: 50%;">0</div>
+                <div class="number" style="top: 20%; left: 85%;">1</div>
+                <div class="number" style="top: 50%; left: 95%;">2</div>
+                <div class="number" style="top: 80%; left: 85%;">3</div>
+                <div class="number" style="top: 90%; left: 50%;">4</div>
+                <div class="number" style="top: 80%; left: 15%;">5</div>
+                <div class="number" style="top: 50%; left: 5%;">6</div>
+                <div class="number" style="top: 20%; left: 15%;">7</div>
                 <div class="hand hour-hand" id="fictionalHourHand"></div>
                 <div class="hand minute-hand" id="fictionalMinuteHand"></div>
                 <div class="hand second-hand" id="fictionalSecondHand"></div>
@@ -71,8 +85,16 @@
         </div>
 
         <!-- Standard-Uhr -->
-        <div>
+        <div class="clock-wrapper">
             <div class="clock" id="standardClock">
+                <div class="number" style="top: 10%; left: 50%;">12</div>
+                <div class="number" style="top: 20%; left: 85%;">1</div>
+                <div class="number" style="top: 50%; left: 95%;">3</div>
+                <div class="number" style="top: 80%; left: 85%;">5</div>
+                <div class="number" style="top: 90%; left: 50%;">6</div>
+                <div class="number" style="top: 80%; left: 15%;">7</div>
+                <div class="number" style="top: 50%; left: 5%;">9</div>
+                <div class="number" style="top: 20%; left: 15%;">11</div>
                 <div class="hand hour-hand" id="standardHourHand"></div>
                 <div class="hand minute-hand" id="standardMinuteHand"></div>
                 <div class="hand second-hand" id="standardSecondHand"></div>
